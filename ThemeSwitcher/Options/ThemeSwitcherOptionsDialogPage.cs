@@ -7,13 +7,12 @@
 
   /// <summary>The options dialog page of the Theme Switcher extension.</summary>
   [Guid("0A6251BA-38BC-4ED7-BDF6-81096F6C5D9E")]
-  public class ThemeSwitcherOptionsDialogPage : DialogPage
-  {
+  public class ThemeSwitcherOptionsDialogPage : UIElementDialogPage {
     #region Properties
 
-    /// <inheritdoc />
-    protected override IWin32Window Window
-    {
+    /// <summary>Gets the WPF child element to be hosted inside the Options dialog page.</summary>
+    /// <returns>The WPF child element.</returns>
+    protected override System.Windows.UIElement Child {
       get { return new ThemeSwitcherOptionsControl(this); }
     }
 

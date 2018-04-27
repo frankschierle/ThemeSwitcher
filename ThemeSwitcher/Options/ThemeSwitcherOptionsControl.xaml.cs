@@ -1,19 +1,11 @@
 ﻿namespace ThemeSwitcher.Options
 {
   using System;
-  using System.Windows.Forms;
+  using System.Windows.Controls;
 
-  /// <summary>The user control shown in the Visual Studio options dialog to
-  /// display the Theme Switcher options.</summary>
+  /// <summary>Interaction logic for ThemeSwitcherOptionsControl.xaml</summary>
   public partial class ThemeSwitcherOptionsControl : UserControl
   {
-    #region Fields
-
-    /// <summary>The options page where all options are stored.</summary>
-    private ThemeSwitcherOptionsDialogPage optionsPage;
-
-    #endregion
-
     #region Constructors and Destructors
 
     /// <summary>Initializes a new instnce of the <see cref="ThemeSwitcherOptionsControl" /> class.</summary>
@@ -26,8 +18,7 @@
         throw new ArgumentNullException(nameof(optionsPage));
       }
 
-      this.optionsPage = optionsPage;
-
+      this.DataContext = optionsPage;
       this.InitializeComponent();
     }
 
