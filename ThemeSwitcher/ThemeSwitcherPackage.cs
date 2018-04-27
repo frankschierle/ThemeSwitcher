@@ -4,10 +4,13 @@
 
   using Microsoft.VisualStudio.Shell;
 
+  using ThemeSwitcher.Options;
+
   /// <summary>This is the class that implements the ThemeSwitcher Visual Studio package.</summary>
-  [PackageRegistration(UseManagedResourcesOnly = true)]
-  [InstalledProductRegistration("Theme Switcher", "A Visual Studio extension that allows users to fast switch between themes and window layouts.", "1.0")]
   [Guid(PackageGuidString)]
+  [PackageRegistration(UseManagedResourcesOnly = true)]
+  [ProvideOptionPage(typeof(ThemeSwitcherOptionsDialogPage), "Theme Switcher", "General", 0, 0, true)]
+  [InstalledProductRegistration("Theme Switcher", "A Visual Studio extension that allows users to fast switch between themes and window layouts.", "1.0")]
   public sealed class ThemeSwitcherPackage : Package
   {
     #region Constants

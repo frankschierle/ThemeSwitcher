@@ -56,6 +56,15 @@
   <ItemGroup>
     <Compile Include="Logic\Theme.cs" />
     <Compile Include="Logic\ThemeManager.cs" />
+    <Compile Include="Options\ThemeSwitcherOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Options\ThemeSwitcherOptionsControl.Designer.cs">
+      <DependentUpon>ThemeSwitcherOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options\ThemeSwitcherOptionsDialogPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeSwitcherPackage.cs" />
   </ItemGroup>
