@@ -54,6 +54,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Logic\Theme.cs" />
+    <Compile Include="Logic\ThemeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeSwitcherPackage.cs" />
   </ItemGroup>
