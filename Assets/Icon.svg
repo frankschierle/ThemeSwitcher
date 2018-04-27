@@ -1,0 +1,19 @@
+<svg width="128mm" height="128mm" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0,-169)">
+    <g transform="translate(-.72842 -1.8776)">
+      <g transform="translate(117.74 -37.609)">
+        <rect x="-108.5" y="235.82" width="86.223" height="46.223" rx=".79836" ry=".48876" fill="#eee" stroke="#999" stroke-width="3.7775"/>
+        <rect x="-100.56" y="242.83" width="32.506" height="6.5808" fill="#777" stroke-width="0"/>
+        <rect x="-100.56" y="255.64" width="32.506" height="6.5808" fill="#777" stroke-width="0"/>
+        <rect x="-100.56" y="268.45" width="32.506" height="6.5808" fill="#777" stroke-width="0"/>
+        <rect x="-62.722" y="242.83" width="32.506" height="32.199" fill="#777" stroke-width="0"/>
+      </g>
+      <g transform="translate(35.341 22.868)">
+        <rect x="-1.3449" y="202.45" width="86.223" height="46.223" rx=".79836" ry=".48876" fill="#666" stroke="#000" stroke-width="3.7775"/>
+        <rect x="6.5926" y="209.31" width="32.506" height="32.506" fill="#ccc" stroke-width="0"/>
+        <rect x="44.434" y="209.31" width="32.506" height="11.339" fill="#ccc" stroke-width="0"/>
+        <rect x="44.434" y="225.94" width="32.506" height="15.875" fill="#ccc" stroke-width="0"/>
+      </g>
+    </g>
+  </g>
+</svg>
