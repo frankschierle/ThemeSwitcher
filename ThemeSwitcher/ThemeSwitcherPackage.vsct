@@ -72,6 +72,7 @@
           <ButtonText>Switch theme and window layout</ButtonText>
           <CanonicalName>SwitchThemeAndWindowLayout</CanonicalName>
           <CommandName>SwitchThemeAndWindowLayout</CommandName>
+          <LocCanonicalName>SwitchThemeAndWindowLayout</LocCanonicalName>
           <MenuText>Switch theme and window layout</MenuText>
         </Strings>
       </Button>
