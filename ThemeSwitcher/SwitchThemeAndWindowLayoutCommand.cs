@@ -2,7 +2,6 @@
 {
   using System;
   using System.ComponentModel.Design;
-  using System.Globalization;
 
   using Microsoft.VisualStudio.Shell;
   using Microsoft.VisualStudio.Shell.Interop;
@@ -59,6 +58,20 @@
 
     #endregion
 
+    #region Enums
+
+    /// <summary>Enumeration of applied themes.</summary>
+    private enum AppliedTheme
+    {
+      /// <summary>The first theme was applied.</summary>
+      Theme1,
+
+      /// <summary>The second theme was applied.</summary>
+      Theme2
+    }
+
+    #endregion
+
     #region Public Properties
 
     /// <summary>Gets the instance of the command.</summary>
@@ -95,9 +108,12 @@
     /// <param name="e">The event args.</param>
     private void MenuItemCallback(object sender, EventArgs e)
     {
+      AppliedTheme appliedTheme;
+
       try
       {
-        this.SwitchTheme();
+        appliedTheme = this.SwitchTheme();
+        this.ApplyWindowLayoutForTheme(appliedTheme);
       }
       catch (Exception ex)
       {
@@ -112,13 +128,15 @@
     }
 
     /// <summary>Switches the theme.</summary>
-    private void SwitchTheme()
+    /// <returns>The applied theme.</returns>
+    private AppliedTheme SwitchTheme()
     {
       var themeManager = new ThemeManager();
       Theme currentTheme = themeManager.GetCurrentTheme();
       Theme targetTheme = null;
+      AppliedTheme appliedTheme;
 
-      if (this.package.Options.Theme1Id == null || this.package.Options.Theme2Id == null)
+      if ((this.package.Options.Theme1Id == null) || (this.package.Options.Theme2Id == null))
       {
         throw new InvalidOperationException("Themes not configured. Please check Theme Switcher settings.");
       }
@@ -132,11 +150,13 @@
       {
         // First theme is applied => switch to theme 2.
         targetTheme = themeManager.GetThemeById(this.package.Options.Theme2Id);
+        appliedTheme = AppliedTheme.Theme2;
       }
       else
       {
         // Second theme or a manually applied theme is active => switch to theme 1
         targetTheme = themeManager.GetThemeById(this.package.Options.Theme1Id);
+        appliedTheme = AppliedTheme.Theme1;
       }
 
       if (targetTheme == null)
@@ -145,6 +165,29 @@
       }
 
       themeManager.ApplyTheme(targetTheme);
+
+      return appliedTheme;
+    }
+
+    /// <summary>Applies the window layout for an applied theme.</summary>
+    /// <param name="theme">The theme that was applied.</param>
+    private void ApplyWindowLayoutForTheme(AppliedTheme theme)
+    {
+      string targetLayoutKey = theme == AppliedTheme.Theme1 ? this.package.Options.WindowLayout1Key : this.package.Options.WindowLayout2Key;
+      var windowLayoutManager = new WindowLayoutManager();
+      WindowLayout targetLayout;
+
+      if (targetLayoutKey != string.Empty)
+      {
+        targetLayout = windowLayoutManager.GetWindowLayoutByKey(targetLayoutKey);
+
+        if (targetLayout == null)
+        {
+          throw new InvalidOperationException("Target window layout not found. Please check Theme Switcher settings.");
+        }
+
+        windowLayoutManager.ApplyWindowLayout(targetLayout);
+      }
     }
 
     #endregion

@@ -25,6 +25,12 @@
     /// <summary>See <see cref="Theme2Id" />.</summary>
     private string theme2Id;
 
+    /// <summary>See <see cref="WindowLayout1Key" />.</summary>
+    private string windowLayout1Key;
+
+    /// <summary>See <see cref="WindowLayout2Key" />.</summary>
+    private string windowLayout2Key;
+
     #endregion
 
     #region Constructors and Destructors
@@ -33,8 +39,12 @@
     public ThemeSwitcherOptionsDialogPage()
     {
       var themeManager = new ThemeManager();
+      var windowLayoutManager = new WindowLayoutManager();
       var themes1 = new ObservableCollection<Theme>(themeManager.GetInstalledThemes());
       var themes2 = new ObservableCollection<Theme>(themeManager.GetInstalledThemes());
+      var windowLayouts = new ObservableCollection<WindowLayout>(windowLayoutManager.GetWindowLayouts());
+
+      windowLayouts.Add(new WindowLayout(string.Empty, -1, "Do not change window layout"));
 
       this.AvailableThemes1 = CollectionViewSource.GetDefaultView(themes1);
       this.AvailableThemes1.SortDescriptions.Add(new SortDescription(nameof(Theme.DisplayName), ListSortDirection.Ascending));
@@ -43,6 +53,9 @@
       this.AvailableThemes2 = CollectionViewSource.GetDefaultView(themes2);
       this.AvailableThemes2.SortDescriptions.Add(new SortDescription(nameof(Theme.DisplayName), ListSortDirection.Ascending));
       this.AvailableThemes2.Filter = theme => !((Theme)theme).Id.Equals(this.Theme1Id);
+
+      this.AvailableWindowLayouts = CollectionViewSource.GetDefaultView(windowLayouts);
+      this.AvailableWindowLayouts.SortDescriptions.Add(new SortDescription(nameof(WindowLayout.Index), ListSortDirection.Ascending));
     }
 
     #endregion
@@ -90,6 +103,37 @@
           this.OnPropertyChanged();
 
           ((CollectionView)this.AvailableThemes1).Refresh();
+        }
+      }
+    }
+
+    /// <summary>Provides a collection of all available window layouts.</summary>
+    public ICollectionView AvailableWindowLayouts { get; }
+
+    /// <inheritdoc />
+    public string WindowLayout1Key
+    {
+      get { return this.windowLayout1Key; }
+      set
+      {
+        if (value != this.windowLayout1Key)
+        {
+          this.windowLayout1Key = value;
+          this.OnPropertyChanged();
+        }
+      }
+    }
+
+    /// <inheritdoc />
+    public string WindowLayout2Key
+    {
+      get { return this.windowLayout2Key; }
+      set
+      {
+        if (value != this.windowLayout2Key)
+        {
+          this.windowLayout2Key = value;
+          this.OnPropertyChanged();
         }
       }
     }

@@ -56,7 +56,13 @@
           Grid.Column="0"
           VerticalAlignment="Center"
           Text="Window layout:" />
-        <ComboBox Grid.Row="2" Grid.Column="2" />
+        <ComboBox
+          Grid.Row="2"
+          Grid.Column="2"
+          DisplayMemberPath="DisplayName"
+          ItemsSource="{Binding AvailableWindowLayouts}"
+          SelectedValue="{Binding WindowLayout1Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValuePath="Key" />
       </Grid>
     </GroupBox>
 
@@ -94,7 +100,13 @@
           Grid.Column="0"
           VerticalAlignment="Center"
           Text="Window layout:" />
-        <ComboBox Grid.Row="2" Grid.Column="2" />
+        <ComboBox
+          Grid.Row="2"
+          Grid.Column="2"
+          DisplayMemberPath="DisplayName"
+          ItemsSource="{Binding AvailableWindowLayouts}"
+          SelectedValue="{Binding WindowLayout2Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValuePath="Key" />
       </Grid>
     </GroupBox>
   </Grid>
