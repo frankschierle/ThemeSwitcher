@@ -4,7 +4,7 @@
 
   /// <summary>Represents a Visual Studio theme.</summary>
   [DebuggerDisplay("{DisplayName}")]
-  internal class Theme
+  public class Theme
   {
     #region Constructors and Destructors
 
