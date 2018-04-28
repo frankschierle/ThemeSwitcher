@@ -54,8 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Logic\NativeMethods.cs" />
     <Compile Include="Logic\Theme.cs" />
     <Compile Include="Logic\ThemeManager.cs" />
+    <Compile Include="Options\IThemeSwitcherOptions.cs" />
     <Compile Include="Options\ThemeSwitcherOptionsControl.xaml.cs">
       <DependentUpon>ThemeSwitcherOptionsControl.xaml</DependentUpon>
     </Compile>

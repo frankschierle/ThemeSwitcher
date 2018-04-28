@@ -21,6 +21,23 @@
 
     #endregion
 
+    #region Properties
+
+    /// <summary>Gets all extension options.</summary>
+    internal IThemeSwitcherOptions Options
+    {
+      get
+      {
+        var optionsPage = (ThemeSwitcherOptionsDialogPage)this.GetDialogPage(typeof(ThemeSwitcherOptionsDialogPage));
+
+        optionsPage.LoadSettingsFromStorage();
+
+        return optionsPage;
+      }
+    }
+
+    #endregion
+
     #region Methods
 
     /// <summary>Initialization of the package; this method is called right

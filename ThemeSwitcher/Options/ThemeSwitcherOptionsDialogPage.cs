@@ -14,6 +14,7 @@
   /// <summary>The options dialog page of the Theme Switcher extension.</summary>
   [Guid("0A6251BA-38BC-4ED7-BDF6-81096F6C5D9E")]
   public class ThemeSwitcherOptionsDialogPage : UIElementDialogPage,
+                                                IThemeSwitcherOptions,
                                                 INotifyPropertyChanged
   {
     #region Fields
@@ -61,7 +62,7 @@
     /// <summary>Provides a collection of all available themes for <see cref="Theme2Id" />.</summary>
     public ICollectionView AvailableThemes2 { get; }
 
-    /// <summary>Gets or sets the id of the first theme.</summary>
+    /// <inheritdoc />
     public string Theme1Id
     {
       get { return this.theme1Id; }
@@ -77,7 +78,7 @@
       }
     }
 
-    /// <summary>Gets or sets the id of the second theme.</summary>
+    /// <inheritdoc />
     public string Theme2Id
     {
       get { return this.theme2Id; }
