@@ -1,5 +1,6 @@
 ﻿namespace ThemeSwitcher.Options
 {
+  using System;
   using System.Collections.Generic;
   using System.Collections.ObjectModel;
   using System.ComponentModel;
@@ -72,9 +73,11 @@
     #region Public Properties
 
     /// <summary>Provides a collection of all available themes for <see cref="Theme1Id" />.</summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public ICollectionView AvailableThemes1 { get; }
 
     /// <summary>Provides a collection of all available themes for <see cref="Theme2Id" />.</summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public ICollectionView AvailableThemes2 { get; }
 
     /// <inheritdoc />
@@ -110,6 +113,7 @@
     }
 
     /// <summary>Provides a collection of all available window layouts.</summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public ICollectionView AvailableWindowLayouts { get; }
 
     /// <inheritdoc />
@@ -149,6 +153,26 @@
     protected override UIElement Child
     {
       get { return new ThemeSwitcherOptionsControl(this); }
+    }
+
+    #endregion
+
+    #region Public Methods and Operators
+
+    /// <inheritdoc />
+    public override void SaveSettingsToStorage()
+    {
+      PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+        this.AutomationObject,
+        new Attribute[]
+        {
+          DesignerSerializationVisibilityAttribute.Visible
+        });
+
+      foreach (object obj in properties)
+      {
+        this.SaveSetting((PropertyDescriptor)obj);
+      }
     }
 
     #endregion
