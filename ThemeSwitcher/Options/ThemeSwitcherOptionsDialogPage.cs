@@ -1,7 +1,9 @@
 ﻿namespace ThemeSwitcher.Options
 {
+  using System.Collections.Generic;
   using System.Collections.ObjectModel;
   using System.ComponentModel;
+  using System.Linq;
   using System.Runtime.CompilerServices;
   using System.Runtime.InteropServices;
   using System.Windows;
@@ -153,11 +155,62 @@
 
     #region Methods
 
+    /// <inheritdoc />
+    protected override void OnActivate(CancelEventArgs e)
+    {
+      var themeManager = new ThemeManager();
+      var windowLayoutManager = new WindowLayoutManager();
+      IEnumerable<Theme> themes = themeManager.GetInstalledThemes();
+      IEnumerable<WindowLayout> windowLayouts = windowLayoutManager.GetWindowLayouts();
+      string currentTheme1 = this.Theme1Id;
+      string currentTheme2 = this.Theme2Id;
+      string currentLayout1 = this.WindowLayout1Key;
+      string currentLayout2 = this.WindowLayout2Key;
+
+      windowLayouts = windowLayouts.Union(new[]
+                                          {
+                                            new WindowLayout(string.Empty, -1, "Do not change window layout")
+                                          });
+
+
+      this.UpdateCollectionView(this.AvailableThemes1, themes);
+      this.UpdateCollectionView(this.AvailableThemes2, themes);
+      this.UpdateCollectionView(this.AvailableWindowLayouts, windowLayouts);
+
+      this.Theme1Id = currentTheme1;
+      this.Theme2Id = currentTheme2;
+      this.WindowLayout1Key = currentLayout1;
+      this.WindowLayout2Key = currentLayout2;
+
+      base.OnActivate(e);
+    }
+
     /// <summary>Raises the <see cref="PropertyChanged" /> event.</summary>
     /// <param name="propertyName">The name of the property.</param>
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
       this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    /// <summary>Updates a <see cref="ICollectionView" />.</summary>
+    /// <typeparam name="T">The type of the objects included in the CollectionViews source collection.</typeparam>
+    /// <param name="collectionView">The CollectionView to update.</param>
+    /// <param name="items">All items that should be included in the CollectionView.</param>
+    private void UpdateCollectionView<T>(ICollectionView collectionView, IEnumerable<T> items)
+    {
+      var targetCollection = (ObservableCollection<T>)collectionView.SourceCollection;
+      IEnumerable<T> itemsToAdd = items.Where(i => !targetCollection.Any(t => t.Equals(i)));
+      IEnumerable<T> itemsToRemove = targetCollection.Where(t => !items.Any(i => i.Equals(t)));
+
+      foreach (T i in itemsToAdd.ToArray())
+      {
+        targetCollection.Add(i);
+      }
+
+      foreach (T i in itemsToRemove.ToArray())
+      {
+        targetCollection.Remove(i);
+      }
     }
 
     #endregion
