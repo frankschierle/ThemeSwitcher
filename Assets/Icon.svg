@@ -1,19 +1,14 @@
-<svg width="128mm" height="128mm" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(0,-169)">
-    <g transform="translate(-.72842 -1.8776)">
-      <g transform="translate(117.74 -37.609)">
-        <rect x="-108.5" y="235.82" width="86.223" height="46.223" rx=".79836" ry=".48876" fill="#eee" stroke="#999" stroke-width="3.7775"/>
-        <rect x="-100.56" y="242.83" width="32.506" height="6.5808" fill="#777" stroke-width="0"/>
-        <rect x="-100.56" y="255.64" width="32.506" height="6.5808" fill="#777" stroke-width="0"/>
-        <rect x="-100.56" y="268.45" width="32.506" height="6.5808" fill="#777" stroke-width="0"/>
-        <rect x="-62.722" y="242.83" width="32.506" height="32.199" fill="#777" stroke-width="0"/>
-      </g>
-      <g transform="translate(35.341 22.868)">
-        <rect x="-1.3449" y="202.45" width="86.223" height="46.223" rx=".79836" ry=".48876" fill="#666" stroke="#000" stroke-width="3.7775"/>
-        <rect x="6.5926" y="209.31" width="32.506" height="32.506" fill="#ccc" stroke-width="0"/>
-        <rect x="44.434" y="209.31" width="32.506" height="11.339" fill="#ccc" stroke-width="0"/>
-        <rect x="44.434" y="225.94" width="32.506" height="15.875" fill="#ccc" stroke-width="0"/>
-      </g>
-    </g>
-  </g>
+<svg width="128px" height="128px" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(204,204,204);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgb(204,204,204);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgb(77,77,77);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(77,77,77);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect x="0px" y="0px" width="128px" height="128px" fill="url(#grad1)" stroke="black" stroke-width="2" />
+  <path d="M37  75 L60 51 L60 68 L92 68 L92 83 L60 83 L60 99 Z" fill="rgb(0,204,255)" />
+  <path d="M120 95 L97 119 L97 103 L65 103 L65 88 L97 88 L97 71 Z" fill="rgb(0,204,255)" />
 </svg>
