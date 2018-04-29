@@ -59,5 +59,14 @@ namespace ThemeSwitcher {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme Switcher settings.
+        /// </summary>
+        internal static string _100 {
+            get {
+                return ResourceManager.GetString("100", resourceCulture);
+            }
+        }
     }
 }
