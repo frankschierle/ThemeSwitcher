@@ -11,7 +11,7 @@
   [PackageRegistration(UseManagedResourcesOnly = true)]
   [ProvideOptionPage(typeof(ThemeSwitcherOptionsDialogPage), "Theme Switcher", "General", 0, 0, true)]
   [ProvideProfile(typeof(ThemeSwitcherOptionsDialogPage), "Theme Switcher", "General", 100, 100, false, DescriptionResourceID = 100)]
-  [InstalledProductRegistration("Theme Switcher", "A Visual Studio extension that allows users to fast switch between themes and window layouts.", "1.0")]
+  [InstalledProductRegistration("Theme Switcher", "A Visual Studio extension that allows users to fast switch between themes and window layouts.", "1.1")]
   [ProvideMenuResource("Menus.ctmenu", 1)]
   public sealed class ThemeSwitcherPackage : Package
   {

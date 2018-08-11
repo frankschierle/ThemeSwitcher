@@ -35,3 +35,10 @@ To switch between themes and window layouts using a toolbar button just add the 
 To switch between themes and window layouts using a keyboard shortcut just assign the desired shortcut to the command `Window.SwitchThemeAndWindowLayout`.
 
 ![Keyboard options](Assets/Screenshots/KeyboardConfiguration.png)
+
+## Changelog
+### Version 1.1
+* Fixed an issue that causes Visual Studio to freeze while applying the theme.
+
+### Version 1.0
+* Initial release.
