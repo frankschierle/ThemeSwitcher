@@ -127,7 +127,7 @@
         }
       }
 
-      NativeMethods.SendMessage(
+      NativeMethods.SendNotifyMessage(
         new IntPtr(NativeMethods.HWND_BROADCAST),
         NativeMethods.WM_SYSCOLORCHANGE,
         IntPtr.Zero,

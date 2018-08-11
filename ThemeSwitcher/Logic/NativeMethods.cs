@@ -18,8 +18,8 @@
     /// <param name="Msg">The message to be sent.</param>
     /// <param name="wParam">Additional message-specific information.</param>
     /// <param name="lParam">Additional message-specific information.</param>
-    /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
+    /// <returns><see langword="true"/> if the function succeeds. Otherwise <see langword="false"/>.</returns>
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+    public static extern bool SendNotifyMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
   }
 }
