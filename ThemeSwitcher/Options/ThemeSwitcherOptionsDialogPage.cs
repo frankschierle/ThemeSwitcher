@@ -41,6 +41,8 @@
     /// <summary>Initializes a new instance of the <see cref="ThemeSwitcherOptionsDialogPage" /> class.</summary>
     public ThemeSwitcherOptionsDialogPage()
     {
+      ThreadHelper.ThrowIfNotOnUIThread();
+
       var themeManager = new ThemeManager();
       var windowLayoutManager = new WindowLayoutManager();
       var themes1 = new ObservableCollection<Theme>(themeManager.GetInstalledThemes());

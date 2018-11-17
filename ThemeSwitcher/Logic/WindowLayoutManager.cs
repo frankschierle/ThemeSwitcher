@@ -20,7 +20,10 @@
     /// <summary>Gets the DTE automation object.</summary>
     private DTE Dte
     {
-      get { return (DTE)Package.GetGlobalService(typeof(DTE)); }
+      get {
+        ThreadHelper.ThrowIfNotOnUIThread();
+        return (DTE)Package.GetGlobalService(typeof(DTE));
+      }
     }
 
     #endregion
@@ -31,6 +34,8 @@
     /// <returns>All defined window layouts.</returns>
     public IEnumerable<WindowLayout> GetWindowLayouts()
     {
+      ThreadHelper.ThrowIfNotOnUIThread();
+
       string registryPath = this.Dte.RegistryRoot + @"\ApplicationPrivateSettings\_metadata\baselines\Microsoft\Visualstudio\Platform\WindowManagement\Layouts";
       var result = new List<WindowLayout>();
       string rawValues;
@@ -95,6 +100,8 @@
     /// <exception cref="ArgumentNullException">Occurs if <paramref name="layout" /> is null.</exception>
     public void ApplyWindowLayout(WindowLayout layout)
     {
+      ThreadHelper.ThrowIfNotOnUIThread();
+
       string cmd;
 
       if (layout == null)

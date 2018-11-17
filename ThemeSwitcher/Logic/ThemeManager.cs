@@ -18,7 +18,11 @@
     /// <summary>Gets the DTE automation object.</summary>
     private DTE Dte
     {
-      get { return (DTE)Package.GetGlobalService(typeof(DTE)); }
+      get
+      {
+        ThreadHelper.ThrowIfNotOnUIThread();
+        return (DTE)Package.GetGlobalService(typeof(DTE));
+      }
     }
 
     #endregion
@@ -29,6 +33,8 @@
     /// <returns>All themes installed in Visual Studio.</returns>
     public IEnumerable<Theme> GetInstalledThemes()
     {
+      ThreadHelper.ThrowIfNotOnUIThread();
+
       string registryPath = this.Dte.RegistryRoot + "_Config\\Themes";
       var themes = new List<Theme>();
       string[] installedThemesKeys;
@@ -59,6 +65,8 @@
     /// <returns>The current Visual Studio theme or null if the current theme cannot be determined.</returns>
     public Theme GetCurrentTheme()
     {
+      ThreadHelper.ThrowIfNotOnUIThread();
+
       string keyName = string.Format(CultureInfo.InvariantCulture, @"{0}\ApplicationPrivateSettings\Microsoft\VisualStudio", this.Dte.RegistryRoot);
       IEnumerable<Theme> allThemes = this.GetInstalledThemes();
       Theme result = null;
@@ -111,6 +119,8 @@
     /// <exception cref="ArgumentNullException">Occurs if <paramref name="theme" /> is null.</exception>
     public void ApplyTheme(Theme theme)
     {
+      ThreadHelper.ThrowIfNotOnUIThread();
+
       string keyName = string.Format(CultureInfo.InvariantCulture, @"{0}\ApplicationPrivateSettings\Microsoft\VisualStudio", this.Dte.RegistryRoot);
 
       if (theme == null)
