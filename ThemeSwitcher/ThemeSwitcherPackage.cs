@@ -1,19 +1,20 @@
 ﻿namespace ThemeSwitcher
 {
+  using System;
   using System.Runtime.InteropServices;
-
+  using System.Threading;
   using Microsoft.VisualStudio.Shell;
 
   using ThemeSwitcher.Options;
 
   /// <summary>This is the class that implements the ThemeSwitcher Visual Studio package.</summary>
   [Guid(PackageGuidString)]
-  [PackageRegistration(UseManagedResourcesOnly = true)]
+  [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
   [ProvideOptionPage(typeof(ThemeSwitcherOptionsDialogPage), "Theme Switcher", "General", 0, 0, true)]
   [ProvideProfile(typeof(ThemeSwitcherOptionsDialogPage), "Theme Switcher", "General", 100, 100, false, DescriptionResourceID = 100)]
   [InstalledProductRegistration("Theme Switcher", "A Visual Studio extension that allows users to fast switch between themes and window layouts.", "1.1")]
   [ProvideMenuResource("Menus.ctmenu", 1)]
-  public sealed class ThemeSwitcherPackage : Package
+  public sealed class ThemeSwitcherPackage : AsyncPackage
   {
     #region Constants
 
@@ -41,14 +42,12 @@
 
     #region Methods
 
-    /// <summary>Initialization of the package; this method is called right
-    /// after the package is sited, so this is the place where you can put all
-    /// the initialization code that rely on services provided by VisualStudio.
-    /// </summary>
-    protected override void Initialize()
+    /// <inheritdoc />
+    protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
     {
-      base.Initialize();
-      SwitchThemeAndWindowLayoutCommand.Initialize(this);
+      await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(continueOnCapturedContext: false);
+
+      await SwitchThemeAndWindowLayoutCommand.InitializeAsync(this).ConfigureAwait(continueOnCapturedContext: false);
     }
 
     #endregion

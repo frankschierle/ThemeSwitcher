@@ -2,7 +2,6 @@
 {
   using System;
   using System.ComponentModel.Design;
-
   using Microsoft.VisualStudio.Shell;
   using Microsoft.VisualStudio.Shell.Interop;
 
@@ -36,24 +35,23 @@
 
     /// <summary> Initializes a new instance of the <see cref="SwitchThemeAndWindowLayoutCommand" /> class.</summary>
     /// <param name="package">Owner package.</param>
-    /// <exception cref="ArgumentNullException">Occurs if <paramref name="package" /> is null.</exception>
-    private SwitchThemeAndWindowLayoutCommand(ThemeSwitcherPackage package)
+    /// <param name="menuCommandService">The service to manage the menu commands.</param>
+    /// <exception cref="ArgumentNullException">Occurs if any of the parameters is null.</exception>
+    private SwitchThemeAndWindowLayoutCommand(ThemeSwitcherPackage package, OleMenuCommandService menuCommandService)
     {
-      OleMenuCommandService commandService;
-
       if (package == null)
       {
         throw new ArgumentNullException(nameof(package));
       }
 
+      if (menuCommandService == null)
+      {
+        throw new ArgumentNullException(nameof(menuCommandService));
+      }
+
       this.package = package;
 
-      commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-
-      if (commandService != null)
-      {
-        commandService.AddCommand(new MenuCommand(this.MenuItemCallback, new CommandID(CommandSet, CommandId)));
-      }
+      menuCommandService.AddCommand(new MenuCommand(this.MenuItemCallback, new CommandID(CommandSet, CommandId)));
     }
 
     #endregion
@@ -93,9 +91,20 @@
 
     /// <summary>Initializes the singleton instance of the command.</summary>
     /// <param name="package">Owner package, not null.</param>
-    public static void Initialize(ThemeSwitcherPackage package)
+    /// <returns>A task representing the async work of command initialization.</returns>
+    public static async System.Threading.Tasks.Task InitializeAsync(ThemeSwitcherPackage package)
     {
-      Instance = new SwitchThemeAndWindowLayoutCommand(package);
+      OleMenuCommandService menuCommandService;
+
+      // Switch to the main thread - the call to AddCommand in Command1's constructor requires
+      // the UI thread.
+      await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
+
+#pragma warning disable VSSDK006 // Check services exist
+      menuCommandService = (OleMenuCommandService)await package.GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(continueOnCapturedContext: false);
+#pragma warning restore VSSDK006 // Check services exist
+
+      Instance = new SwitchThemeAndWindowLayoutCommand(package, menuCommandService);
     }
 
     #endregion
