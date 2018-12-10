@@ -186,7 +186,7 @@
       var windowLayoutManager = new WindowLayoutManager();
       WindowLayout targetLayout;
 
-      if (targetLayoutKey != string.Empty)
+      if (!string.IsNullOrEmpty(targetLayoutKey))
       {
         targetLayout = windowLayoutManager.GetWindowLayoutByKey(targetLayoutKey);
 
