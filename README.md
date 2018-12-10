@@ -37,6 +37,9 @@ To switch between themes and window layouts using a keyboard shortcut just assig
 ![Keyboard options](Assets/Screenshots/KeyboardConfiguration.png)
 
 ## Changelog
+### Version 1.3
+* Bugfix: NullReferenceException when no window layouts have been configured.
+
 ### Version 1.2
 * Support for Visual Studio 2019 (Preview 1)
 * The extension is initialized asynchronously. This will be a requirement in future versions of Visual Studio to work correctly.
