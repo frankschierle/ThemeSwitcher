@@ -1,4 +1,4 @@
-# Theme Switcher
+﻿# Theme Switcher
 
 Theme Switcher is a free Visual Studio extension that allows users to fast switch between two themes and window layouts.
 
@@ -37,6 +37,9 @@ To switch between themes and window layouts using a keyboard shortcut just assig
 ![Keyboard options](Assets/Screenshots/KeyboardConfiguration.png)
 
 ## Changelog
+### Version 1.4
+* Bugfix/Compatibility update: Fixed a NullReferenceException that occured in Visual Studio 16.8.
+
 ### Version 1.3
 * Bugfix: NullReferenceException when no window layouts have been configured.
 
