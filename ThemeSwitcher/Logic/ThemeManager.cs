@@ -38,6 +38,7 @@
       string registryPath = this.Dte.RegistryRoot + "_Config\\Themes";
       var themes = new List<Theme>();
       string[] installedThemesKeys;
+      object themeName;
 
       using (RegistryKey themesKey = Registry.CurrentUser.OpenSubKey(registryPath))
       {
@@ -51,7 +52,10 @@
             {
               if (themeKey != null)
               {
-                themes.Add(new Theme(key, themeKey.GetValue(null).ToString()));
+                themeName = themeKey.GetValue(null);
+                if (themeName != null) {
+                  themes.Add(new Theme(key, themeKey.GetValue(null).ToString()));
+                }
               }
             }
           }
